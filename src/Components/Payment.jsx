@@ -1,259 +1,156 @@
-import React, { useEffect, useState } from "react";
-import { paymentData } from "./EmployeeData";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  handleEditPayment,
+  handleClearPayment,
+  handleSavePayment,
+  handleUpdatePayment,
+  handleDeletePayment,
+  updateAmount,
+  updateMethod,
+  updateDate,
+  updateName,
+} from "../mySlice";
 
 const Payment = () => {
-  const [data, setData] = useState([]);
-  const [id, setId] = useState(0);
-  const [name, setName] = useState("");
-  const [method, setMethod] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState(0);
-  const [isUpdate, setIsUpdate] = useState(false);
+  const dispatch = useDispatch();
+  const { paymentData, isUpdate, selectedId, name, amount, date, method } =
+    useSelector((state) => state.myData);
 
-  useEffect(() => {
-    setData(paymentData);
-  }, []);
-
-  const handleEdit = (id) => {
-    const dt = data.filter((item) => item.id === id);
-    if (dt !== undefined) {
-      setIsUpdate(true);
-      setId(id);
-      setName(dt[0].name);
-      setMethod(dt[0].method);
-      setAmount(dt[0].amount);
-      setDate(dt[0].date);
-    }
-  };
-
-  const handleClear = () => {
-    setId(0);
-    setName("");
-    setMethod("");
-    setDate(0);
-    setAmount(0);
-    setIsUpdate(false);
-  };
-
-  const handleSave = (e) => {
-    let error = "";
-    if (name === "") {
-      error += "Name is required ,";
-    }
-    if (method === "") {
-      error += "Method is required ,";
-    }
-    if (date === "") {
-      error += "Date is required ,";
-    }
-    if (amount <= 0) {
-      error += "Amount is required.";
-    }
-    if (error === "") {
-      e.preventDefault();
-      const dt = [...data];
-      const newObject = {
-        id: paymentData.length + 1,
-        name: name,
-        method: method,
-        amount: amount,
-        date: date,
-      };
-      dt.push(newObject);
-      setData(dt);
-    } else {
-      alert(error);
-    }
-  };
-
-  const handleUpdate = () => {
-    const index = data
-      .map((item) => {
-        return item.id;
-      })
-      .indexOf(id);
-    const dt = [...data];
-    dt[index].name = name;
-    dt[index].method = method;
-    dt[index].amount = amount;
-    dt[index].date = date;
-    setData(dt);
-    handleClear();
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm("Are u sure")) {
-      if (id > 0) {
-        const dt = data.filter((item) => item.id !== id);
-        setData(dt);
+  const saveData = () => {
+    if (name && amount && date && method) {
+      if (isUpdate) {
+        dispatch(
+          handleUpdatePayment({ id: selectedId, name, amount, date, method })
+        );
+        toast.success("Updated Successfully!");
+      } else {
+        dispatch(handleSavePayment({ name, amount, date, method }));
+        toast.success("Saved Successfully!");
       }
+    } else {
+      toast.error("All fields are required!");
+    }
+  };
+
+  const handleDeleteItem = (id) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (isConfirmed) {
+      dispatch(handleDeletePayment({ id }));
+      toast.success("Deleted successfully!");
     }
   };
 
   return (
-    <div
-      style={{
-        background: "linear-gradient(to right, #9EF8EE 20%, #00635A 100%)",
-      }}
-      className="h-full w-[63rem] flex flex-col justify-center items-center"
-    >
-      <div className="flex mb-2">
+    <div className="h-full overflow-y-auto overflow-x-hidden w-[63rem] flex flex-col items-center">
+      <div className="flex mt-5 gap-x-1 h-[9vh]">
         <div>
           <label className="">Name:</label>
           <input
+            className="border"
             type="text"
             placeholder="Enter ur name"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => dispatch(updateName(e.target.value))}
             value={name}
           />
         </div>
         <div>
           <label>Method:</label>
           <input
+            className="border"
             type="text"
             placeholder="Enter ur Method"
-            onChange={(e) => setMethod(e.target.value)}
+            onChange={(e) => dispatch(updateMethod(e.target.value))}
             value={method}
           />
         </div>
         <div>
           <label>Amount:</label>
           <input
+            className="border"
             type="text"
             placeholder="Enter ur Amount"
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => dispatch(updateAmount(e.target.value))}
             value={amount}
           />
         </div>
         <div>
           <label>Date:</label>
           <input
+            className="border"
             type="text"
             placeholder="Enter Date"
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e) => dispatch(updateDate(e.target.value))}
             value={date}
           />
         </div>
-        <div className="flex gap-x-2">
-          {!isUpdate ? (
-            <button
-              onClick={(e) => handleSave(e)}
-              class="relative flex items-center ml-2 px-6 py-3 h-9 w-[6rem] mt-3 overflow-hidden font-medium transition-all bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] rounded-md group"
-            >
-              <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-                <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-                <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-400 rounded-md group-hover:translate-x-0"></span>
-              <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-                Save
-              </span>
-            </button>
-          ) : (
-            <button
-              onClick={() => handleUpdate()}
-              class="relative flex items-center ml-2 px-6 py-3 h-9 mt-3 overflow-hidden font-medium transition-all bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] rounded-md group"
-            >
-              <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-                <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-                <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-400 rounded-md group-hover:translate-x-0"></span>
-              <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-                Uptade
-              </span>
-            </button>
-          )}
-          <button
-            onClick={() => handleClear()}
-            class="relative flex items-center px-6 py-3 h-9 w-[6rem] mt-3 overflow-hidden font-medium transition-all bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] rounded-md group"
-          >
-            <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-              <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-            </span>
-            <span class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-              <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-            </span>
-            <span class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-400 rounded-md group-hover:translate-x-0"></span>
-            <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-              Clear
-            </span>
-          </button>
-        </div>
       </div>
-      <table className="border border-2 h-[20rem]  border-[#F2CB05] w-[63rem]">
-        <thead className="">
-          <tr className="border border-2  border-[#F2CB05]">
-            <td className="border border-2  border-[#F2CB05]">Sr.No</td>
-            <td className="border border-2  border-[#F2CB05]">ID</td>
-            <td className="border border-2  border-[#F2CB05]">Name</td>
-            <td className="border border-2  border-[#F2CB05]">Method</td>
-            <td className="border border-2  border-[#F2CB05]">Amount</td>
-            <td className="border border-2  border-[#F2CB05]">Date</td>
-            <td className="border border-2  border-[#F2CB05]">Action</td>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td className="border border-2  border-[#F2CB05]">
-                  {index + 1}
-                </td>
-                <td className="border border-2  border-[#F2CB05]">{item.id}</td>
-                <td className="border border-2  border-[#F2CB05]">
-                  {item.name}
-                </td>
-                <td className="border border-2  border-[#F2CB05]">
-                  {item.method}
-                </td>
-                <td className="border border-2  border-[#F2CB05]">
-                  {item.amount}
-                </td>
-                <td className="border border-2  border-[#F2CB05]">
-                  {item.date}
-                </td>
-                <td className=" border border-1 h-[4rem] border-[#F2CB05] flex justify-center items-center space-x-3">
-                  <button
-                    onClick={() => handleEdit(item.id)}
-                    class="relative flex items-center ml-2 px-6 py-3 h-9 w-[6rem] overflow-hidden font-medium transition-all bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] rounded-md group"
-                  >
-                    <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-                      <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-                    </span>
-                    <span class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-                      <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-                    </span>
-                    <span class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-400 rounded-md group-hover:translate-x-0"></span>
-                    <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-                      Edit
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    class="relative flex items-center ml-2 px-6 py-3 h-9 overflow-hidden font-medium transition-all bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] rounded-md group"
-                  >
-                    <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-                      <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-                    </span>
-                    <span class="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-                      <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-                    </span>
-                    <span class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-400 rounded-md group-hover:translate-x-0"></span>
-                    <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-                      Delete
-                    </span>
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="flex ml-auto mt-3 gap-x-4 mb-4 mr-11">
+        <button
+          onClick={saveData}
+          class="flex items-center px-8 py-1 w-[7rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+        >
+          {isUpdate ? "Update" : "Save"}
+        </button>
+
+        <button
+          onClick={() => dispatch(handleClearPayment())}
+          class="flex items-center px-8 py-1 w-[7rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+        >
+          Clear
+        </button>
+      </div>
+      <div className="bg-[#E5E5E5] w-[63rem] max-w-full h-[140vh] flex justify-center">
+        <table className="border-separate  w-[57rem] table-fixed">
+          <thead className="">
+            <tr className="">
+              <td className="">Sr.No</td>
+              <td className="">ID</td>
+              <td className="">Name</td>
+              <td className="">Method</td>
+              <td className="">Amount</td>
+              <td className="">Date</td>
+              <td className="">Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            {paymentData.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td className="border border-white ">{index + 1}</td>
+                  <td className="border border-white ">{item.id}</td>
+                  <td className="border border-white ">{item.name}</td>
+                  <td className="border border-white ">{item.method}</td>
+                  <td className="border border-white ">{item.amount}</td>
+                  <td className="border border-white ">{item.date}</td>
+                  <td className=" border border-white ">
+                    <div className="flex justify-center items-center space-x-1 ">
+                      <button
+                        onClick={() =>
+                          dispatch(handleEditPayment({ id: item.id }))
+                        }
+                        className="flex items-center px-5 py-1 w-[4rem] border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteItem(item.id)}
+                        className="flex items-center px-2 py-1 w-[4rem] border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
