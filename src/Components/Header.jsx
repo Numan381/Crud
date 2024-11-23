@@ -9,7 +9,7 @@ import { LuBadgeDollarSign } from "react-icons/lu";
 
 const Header = () => {
   return (
-    <div className="h-full">
+    <div className="h-[39.5rem]">
       <div className="w-[17rem] h-[39.5rem] bg-[#F2EAE1] flex flex-col items-center overflow-hidden">
         <h2 className="text-2xl mt-6 animate-scroll whitespace-nowrap">CRUD OPERATIONS</h2>
         <img

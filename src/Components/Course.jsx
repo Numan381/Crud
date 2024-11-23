@@ -57,7 +57,7 @@ const Course = () => {
   };
 
   return (
-    <div className="h-full overflow-y-auto overflow-x-hidden w-[63rem] flex flex-col items-center">
+    <div className="h-[39.5rem] overflow-y-auto overflow-x-hidden w-[63rem] flex flex-col items-center">
       <div className="flex mt-5 gap-x-[7rem] h-[9vh]">
         <div>
           <label className="">Name:</label>
