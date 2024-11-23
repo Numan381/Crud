@@ -20,6 +20,20 @@ const Student = () => {
     useSelector((state) => state.myData);
 
   const saveData = () => {
+    const phoneRegex = /^[0-9]{11}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (name.length > 20) {
+      toast.error("You can't exceed than 20 character in name!");
+      return;
+    };
+    if (!phoneRegex.test(phone)) {
+      toast.error("You can't exceed than 11 digits in number!");
+      return;}
+    if (!emailRegex.test(email)){
+      toast.error("Please enter your email!");
+     return;
+    }  
+
     if (name && email && phone) {
       if (isUpdate) {
         dispatch(handleUpdateEmployee({ id: selectedId, name, email, phone }));
@@ -80,63 +94,62 @@ const Student = () => {
       <div className="flex ml-auto mt-3 gap-x-4 mb-4 mr-11">
         <button
           onClick={saveData}
-          className=" flex items-center px-8 py-1 w-[7rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          className=" flex items-center px-8 py-1 w-[6rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           {isUpdate ? "Update" : "Save"}
         </button>
 
         <button
           onClick={() => dispatch(handleClearEmployee())}
-          class=" flex items-center px-8 py-1 w-[7rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          class=" flex items-center px-8 py-1 w-[6rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           Clear
         </button>
       </div>
 
-      <div className="bg-[#E5E5E5] w-[63rem] max-w-full h-[140vh] flex justify-center">
-        <table className="border-separate  w-[57rem] table-fixed">
-          <thead className="">
-            <tr className="">
-              <td className="">Sr.No</td>
-              <td className="">ID</td>
-              <td className="">Name</td>
-              <td className="">Email</td>
-              <td className="">Phone_Number</td>
-              <td className="">Action</td>
-            </tr>
-          </thead>
-          <tbody className="">
-            {employeeData.map((item, index) => {
-              return (
-                <tr key={index} className="" >
-                  <td className="border border-white ">{index + 1} </td>
-                  <td className="border border-white ">{item.id}</td>
-                  <td className="border border-white ">{item.name}</td>
-                  <td className="border border-white ">{item.email}</td>
-                  <td className="border border-white ">{item.phone}</td>
-                  <td className="border border-white ">
-                    <div className="flex justify-center items-center space-x-3">
+      <div className="bg-[#E5E5E5] w-[63rem] h-[140vh] flex flex-col">
+        <div className="flex mt-6 list-none px-4 py-4 bg-gray-400 font-bold text-center h-[3.5rem]">
+          <li className="w-[10%]">Sr.No</li>
+          <li className="w-[10%]">ID</li>
+          <li className="w-[20%]">Name</li>
+          <li className="w-[25%]">Email</li>
+          <li className="w-[20%]">Phone_Number</li>
+          <li className="w-[10%]">Action</li>
+        </div>
+        <div className="mt-3">
+          {employeeData.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="flex list-none bg-white border rounded-3xl mb-1 px-4 py-5 h-[4rem] text-center items-center"
+              >
+                <li className="w-[10%] ">{index + 1} </li>
+                <li className="w-[10%] ">{item.id}</li>
+                <li className="w-[20%] ">{item.name}</li>
+                <li className="w-[25%] ">{item.email}</li>
+                <li className="w-[20%] ">{item.phone}</li>
+                <li className="w-[10%] ">
+                  <div className="flex justify-center items-center space-x-2">
                     <button
                       onClick={() =>
                         dispatch(handleEditEmployee({ id: item.id }))
                       }
-                      className="flex items-center px-6 py-1 w-[4.5rem] border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      className="flex items-center px-6 py-1 w-[4.5rem] border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteItem(item.id)}
-                      className="flex items-center px-2 py-1 w-[6rem] border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      className="flex items-center px-2 py-1 w-[6rem] border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                     >
-                    Delete
+                      Delete
                     </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                  </div>
+                </li>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

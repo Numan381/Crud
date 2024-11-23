@@ -21,7 +21,7 @@ const Header = () => {
         <p className="text-lg text-[#F2CB05] ">Admin</p>
         <HashLink to={"/#home"}>
           <button class="cursor-pointer flex justify-center items-center mt-9 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded ">
-            <TiHomeOutline className="mt-1 mr-2 " /> Home
+            <TiHomeOutline className="mt-1 mr-1 ml-[-3px] " /> Home
           </button>
         </HashLink>
 
