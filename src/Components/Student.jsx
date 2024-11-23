@@ -22,28 +22,36 @@ const Student = () => {
   const saveData = () => {
     const phoneRegex = /^[0-9]{11}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-    if (name.length > 20) {
-      toast.error("You can't exceed than 20 character in name!");
-      return;
-    };
-    if (!phoneRegex.test(phone)) {
-      toast.error("You can't exceed than 11 digits in number!");
-      return;}
-    if (!emailRegex.test(email)){
-      toast.error("Please enter your email!");
-     return;
-    }  
+    const errors = []; 
 
-    if (name && email && phone) {
-      if (isUpdate) {
-        dispatch(handleUpdateEmployee({ id: selectedId, name, email, phone }));
-        toast.success("Updated Successfully!");
-      } else {
-        dispatch(handleSaveEmployee({ name, email, phone }));
-        toast.success("Saved Successfully!");
-      }
+    if (!name) {
+      errors.push("Name is required!");
+    } else if (name.length > 20) {
+      errors.push("You can't exceed 20 characters in the name!");
+    }
+  
+    if (!phone) {
+      errors.push("Phone number is required!");
+    } else if (!phoneRegex.test(phone)) {
+      errors.push("Phone number must be exactly 11 digits!");
+    }
+ 
+    if (!email) {
+      errors.push("Email is required!");
+    } else if (!emailRegex.test(email)) {
+      errors.push("Please enter a valid email ending with @gmail.com!");
+    }
+  
+    if (errors.length > 0) {
+      errors.forEach((error) => toast.error(error));
+      return;
+    }
+    if (isUpdate) {
+      dispatch(handleUpdateEmployee({ id: selectedId, name, email, phone }));
+      toast.success("Updated Successfully!");
     } else {
-      toast.error("All fields are required!");
+      dispatch(handleSaveEmployee({ name, email, phone }));
+      toast.success("Saved Successfully!");
     }
   };
 
