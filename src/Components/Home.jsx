@@ -15,7 +15,7 @@ const Home = () => {
 
 
   return (
-    <div className="flex w-[63rem] h-full space-x-[4rem]">
+    <div className="flex w-[63rem] h-full space-x-[4rem] mt-[10rem]">
       <Link to="/student">
         <div
           class="flex flex-col w-[15rem] ml-[5rem] h-[9rem] bg-[#F0F9FF] rounded"

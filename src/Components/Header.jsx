@@ -10,8 +10,8 @@ import { LuBadgeDollarSign } from "react-icons/lu";
 const Header = () => {
   return (
     <div className="h-full">
-      <div className="w-[17rem] h-[39.5rem] bg-[#F2EAE1] flex flex-col items-center">
-        <h2 className="text-2xl mt-6">CRUD OPERATIONS</h2>
+      <div className="w-[17rem] h-[39.5rem] bg-[#F2EAE1] flex flex-col items-center overflow-hidden">
+        <h2 className="text-2xl mt-6 animate-scroll whitespace-nowrap">CRUD OPERATIONS</h2>
         <img
           className="w-[7rem] h-[7rem] mt-9 object-cover overflow-hidden rounded-full"
           src={profilE}
@@ -21,24 +21,24 @@ const Header = () => {
         <p className="text-lg text-[#F2CB05] ">Admin</p>
         <HashLink to={"/#home"}>
           <button class="cursor-pointer flex justify-center items-center mt-9 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded ">
-            <TiHomeOutline className="mt-1 mr-2" /> Home
+            <TiHomeOutline className="mt-1 mr-2 " /> Home
           </button>
         </HashLink>
 
         <Link to={"/student"}>
-          <button class="cursor-pointer flex justify-center items-center mt-9 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded">
-            <PiStudentLight className="mt-1 mr-2" /> Student
+          <button class="cursor-pointer flex justify-center items-center mt-9 ml-2 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded">
+            <PiStudentLight className="mt-1 mr-1 stroke-[6]" /> Student
           </button>
         </Link>
         <Link to={"/Course"}>
           <button class="cursor-pointer flex justify-center items-center mt-9 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded">
-            <PiTagChevron className="mt-1 mr-2 rotate-[270deg]" />
+            <PiTagChevron className="mt-1 mr-1 rotate-[270deg] stroke-[6]" />
             Course
           </button>
         </Link>
         <Link to={"/payment"}>
-          <button class="cursor-pointer flex justify-center items-center mt-9 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded">
-            <LuBadgeDollarSign className="mt-1 mr-2" />
+          <button class="cursor-pointer flex justify-center items-center mt-9 ml-3 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded">
+            <LuBadgeDollarSign className="mt-1 mr-1" />
             Payment
           </button>
         </Link>

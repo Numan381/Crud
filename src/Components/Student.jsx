@@ -105,7 +105,7 @@ const Student = () => {
               <td className="">Action</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {employeeData.map((item, index) => {
               return (
                 <tr key={index} className="" >
