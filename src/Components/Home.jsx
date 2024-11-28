@@ -15,7 +15,7 @@ const Home = () => {
 
 
   return (
-    <div className="flex lg:flex-row sm:flex-col sm:justify-center lg:w-[33rem] h-full sm:h-auto sm:space-y-3 mt-[6rem]">
+    <div className="flex lg:flex-row xl:gap-x-9 xl:ml-5 sm:flex-col sm:justify-center lg:w-[33rem] h-full sm:h-auto sm:space-y-3 mt-[6rem]">
       <Link to="/student">
         <div className="flex flex-col w-[15rem] sm:ml-[-18rem] lg:ml-[1rem] lg:mt-3 h-[9rem] bg-[#F0F9FF] rounded">
           <img src={gra} alt="courseImg" className="w-9 mt-7 ml-6" />

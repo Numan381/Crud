@@ -64,8 +64,8 @@ const Payment = () => {
 
   return (
     <div className="h-[39.5rem] overflow-y-auto sm:w-[83rem] flex flex-col items-center">
-      <div className="flex lg:flex-row sm:flex-col sm:mr-[8rem] sm:mb-7 md:mb-7 sm:gap-y-2 mt-4 lg:ml-[8rem] lg:gap-x-[1rem] h-[9vh]">
-        <div className="">
+      <div className="flex lg:flex-row sm:flex-col sm:mr-[8rem] sm:mb-7 md:mb-7 sm:gap-y-2 mt-4 lg:ml-[8rem] lg:gap-x-[1rem] xl:gap-x-[3rem] h-[9vh]">
+        <div className=" xl:ml-12">
           <label className="">Name:</label>
           <input
             className="border sm:ml-3 lg:ml-1"
@@ -109,14 +109,14 @@ const Payment = () => {
       <div className="flex lg:flex-row sm:flex-col sm:mr-[12rem] sm:mt-[-38px] lg:mt-7 lg:mr-14 sm:gap-y-4 ml-auto mt-3 gap-x-4 mb-4 mr-11">
         <button
           onClick={saveData}
-          class="flex items-center px-8 py-1 w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          class="flex items-center xl:px-7 py-1 xl:w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           {isUpdate ? "Update" : "Save"}
         </button>
 
         <button
           onClick={() => dispatch(handleClearPayment())}
-          class="flex items-center px-8 py-1 w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          class="flex items-center xl:px-7 py-1 xl:w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           Clear
         </button>
@@ -151,13 +151,13 @@ const Payment = () => {
                       onClick={() =>
                         dispatch(handleEditPayment({ id: item.id }))
                       }
-                      className="flex items-center px-5 py-1 sm:w-[3rem] md:w-[5rem] md:px-5 border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      className="flex items-center px-5 py-1 xl:w-[6rem] xl:px-9 sm:w-[3rem] md:w-[5rem] md:px-5 border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteItem(item.id)}
-                      className="flex items-center px-2 py-1 sm:w-[4rem] md:w-[6rem] md:px-3 border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      className="flex items-center px-2 py-1 xl:w-[6rem] xl:px-7 sm:w-[4rem] md:w-[6rem] md:px-3 border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                     >
                       Delete
                     </button>

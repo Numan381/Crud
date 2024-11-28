@@ -67,11 +67,11 @@ const Student = () => {
 
   return (
     <div className="h-[39.5rem] overflow-y-auto sm:w-[83rem] flex flex-col items-center">
-      <div className="flex lg:flex-row sm:flex-col sm:mr-[8rem] sm:gap-y-2 mt-5 lg:ml-[5rem] lg:gap-x-[1rem] h-[9vh]">
-        <div className="lg:flex">
+      <div className="flex lg:flex-row sm:flex-col sm:mr-[8rem] sm:gap-y-2 mt-5 lg:ml-[5rem] lg:gap-x-[1rem] xl:gap-x-[4rem]  h-[9vh]">
+        <div className="lg:flex xl:ml-14">
           <label className="">Name:</label>
           <input
-            className="border"
+            className="border xl:ml-2"
             type="text"
             placeholder="Enter ur name"
             onChange={(e) => dispatch(updateName(e.target.value))}
@@ -81,7 +81,7 @@ const Student = () => {
         <div className="lg:flex">
           <label>Email:</label>
           <input
-            className="border sm:ml-1"
+            className="border sm:ml-1 xl:ml-2"
             type="email"
             placeholder="Enter ur email"
             onChange={(e) => dispatch(updateEmail(e.target.value))}
@@ -91,7 +91,7 @@ const Student = () => {
         <div className="lg:flex">
           <label>Phone:</label>
           <input
-            className="border"
+            className="border xl:ml-2"
             type="number"
             placeholder="Enter ur phone"
             onChange={(e) => dispatch(updatePhone(e.target.value))}
@@ -102,20 +102,20 @@ const Student = () => {
       <div className="flex lg:flex-row sm:flex-col sm:mr-[12rem] sm:mt-[-38px] lg:mt-7 lg:mr-14 sm:gap-y-4 ml-auto mt-3 gap-x-4 mb-4 mr-11">
         <button
           onClick={saveData}
-          className=" flex items-center px-8 py-1 w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          className=" flex items-center xl:px-6 py-1 xl:w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           {isUpdate ? "Update" : "Save"}
         </button>
 
         <button
           onClick={() => dispatch(handleClearEmployee())}
-          class=" flex items-center px-8 py-1 w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          class=" flex items-center xl:px-7 py-1 xl:w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           Clear
         </button>
       </div>
 
-      <div className="bg-[#E5E5E5] sm:w-[40rem] md:w-[48rem] lg:h-[140vh] lg:flex lg:flex-col lg:w-full">
+      <div className="bg-[#E5E5E5] sm:w-[40rem] md:w-[48rem] lg:h-[140vh] lg:flex lg:flex-col lg:w-full xl:w-full">
         <div className="flex mt-6 list-none px-4 py-4 bg-gray-400 font-bold text-center h-[3.5rem] lg:w-full">
           <li className="sm:w-[5%] md:w-[7%]">Sr.No</li>
           <li className="sm:w-[7%]">ID</li>
@@ -142,13 +142,13 @@ const Student = () => {
                       onClick={() =>
                         dispatch(handleEditEmployee({ id: item.id }))
                       }
-                      className="flex items-center px-3 py-1 sm:w-[3rem] md:w-[5rem] md:px-5 border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      className="flex items-center px-3 py-1 sm:w-[3rem] xl:w-[6rem] xl:px-8 md:w-[5rem] md:px-5 border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteItem(item.id)}
-                      className="flex items-center px-2 py-1 sm:w-[4rem] md:w-[6rem] md:px-3 border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                      className="flex items-center px-2 py-1 sm:w-[4rem] md:w-[6rem] xl:w-[6rem] xl:px-6 md:px-3 border border-gray hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                     >
                       Delete
                     </button>
