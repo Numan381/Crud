@@ -9,11 +9,11 @@ import { LuBadgeDollarSign } from "react-icons/lu";
 
 const Header = () => {
   return (
-    <div className="h-[39.5rem]">
-      <div className="w-[17rem] h-[39.5rem] bg-[#F2EAE1] flex flex-col items-center overflow-hidden">
+    <div className="h-[39.5rem] lg:h-full sm:flex sm:flex-col sm:justify-center sm:w-screen">
+      <div className="lg:w-[17rem] sm:w-screen h-[39.5rem] lg:h-[49rem] bg-[#F2EAE1] flex flex-col items-center">
         <h2 className="text-2xl mt-6 animate-scroll whitespace-nowrap">CRUD OPERATIONS</h2>
         <img
-          className="w-[7rem] h-[7rem] mt-9 object-cover overflow-hidden rounded-full"
+          className="w-[7rem] h-[7rem] mt-9 object-cover  aspect-square rounded-full"
           src={profilE}
           alt="profileIMG"
         />
@@ -42,6 +42,9 @@ const Header = () => {
             Payment
           </button>
         </Link>
+        <button class="cursor-pointer flex justify-center items-center mt-[5rem] ml-3 w-[120px] h-[35px] hover:bg-[#FEAF00] transition-colors duration-300 rounded">
+            Logout
+          </button>
       </div>
     </div>
   );

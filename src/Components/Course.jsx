@@ -57,19 +57,19 @@ const Course = () => {
   };
 
   return (
-    <div className="h-[39.5rem] overflow-y-auto overflow-x-hidden w-[63rem] flex flex-col items-center">
-      <div className="flex mt-5 gap-x-[7rem] h-[9vh]">
-        <div>
+    <div className="h-[39.5rem] overflow-y-auto overflow-x-hidden sm:w-[83rem] flex flex-col items-center">
+      <div className="flex lg:flex-row sm:flex-col sm:mr-[8rem] sm:gap-y-2 mt-5 lg:ml-[5rem] lg:gap-x-[1rem] h-[9vh]">
+        <div className="lg:flex">
           <label className="">Name:</label>
           <input
-            className="border"
+            className="border sm:ml-6"
             type="text"
             placeholder="Enter ur name"
             onChange={(e) => dispatch(updateName(e.target.value))}
             value={name}
           />
         </div>
-        <div>
+        <div className="lg:flex">
           <label>Instructor:</label>
           <input
             className="border"
@@ -79,10 +79,10 @@ const Course = () => {
             value={instructor}
           />
         </div>
-        <div>
+        <div className="lg:flex">
           <label>level:</label>
           <input
-            className="border"
+            className="border sm:ml-9"
             type="text"
             placeholder="Enter ur Level"
             onChange={(e) => dispatch(updateLevel(e.target.value))}
@@ -90,51 +90,51 @@ const Course = () => {
           />
         </div>
       </div>
-      <div className="flex ml-auto mt-3 gap-x-4 mb-4 mr-9">
+      <div className="flex lg:flex-row sm:flex-col sm:mr-[11rem] sm:mt-[-55px] lg:mt-7 lg:mr-14 sm:gap-y-6 ml-auto mt-3 gap-x-4 mb-4 mr-11">
         <button
           onClick={saveData}
-          className="flex items-center px-8 py-1 w-[6rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          className="flex items-center px-8 py-1 w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           {isUpdate ? "Update" : "Save"}
         </button>
         <button
           onClick={() => dispatch(handleClearCourse())}
-          className="flex items-center px-8 py-1 w-[6rem] border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+          className="flex items-center px-8 py-1 w-[6rem] sm:w-[4rem] sm:px-4 border hover:bg-[#FEAF00] hover:text-white  rounded-lg"
         >
           Clear
         </button>
       </div>
-      <div className="bg-[#E5E5E5] w-[63rem] h-[140vh] flex flex-col">
-            <div className="flex mt-6 list-none px-4 py-4 bg-gray-400 font-bold text-center h-[3.5rem]">
-              <li className="w-[10%]">Sr.No</li>
-              <li className="w-[10%]">ID</li>
-              <li className="w-[20%]">Name</li>
-              <li className="w-[20%]">Instructor</li>
-              <li className="w-[20%]">level</li>
-              <li className="w-[20%]">Action</li>
+      <div className="bg-[#E5E5E5] sm:w-[40rem] md:w-[48rem] lg:h-[140vh] lg:flex lg:flex-col lg:w-full">
+            <div className="flex mt-6 list-none px-4 py-4 bg-gray-400 font-bold text-center h-[3.5rem] lg:w-full">
+              <li className="sm:w-[5%] md:w-[7%]">Sr.No</li>
+              <li className="sm:w-[7%]">ID</li>
+              <li className="sm:w-[20%] md:w-[20%]">Name</li>
+              <li className="sm:w-[25%] md:w-[30%]">Instructor</li>
+              <li className="sm:w-[12%] md:w-[15%]">level</li>
+              <li className="sm:w-[20%] lg:w-[30%]">Action</li>
             </div>
           <div className="mt-3">
             {courseData.map((item, index) => {
               return (
                 <div key={index} className="flex list-none bg-white border rounded-3xl mb-1 px-4 py-5 h-[4rem] text-center items-center" >
-                  <li className="w-[10%]">{index + 1}</li>
-                  <li className="w-[10%]">{item.id}</li>
-                  <li className="w-[20%]">{item.name}</li>
-                  <li className="w-[20%]">{item.instructor}</li>
-                  <li className="w-[20%]">{item.level}</li>
-                  <li className="w-[20%]">
+                  <li className="sm:w-[5%] md:w-[7%]">{index + 1}</li>
+                  <li className="w-[7%]">{item.id}</li>
+                  <li className="sm:w-[20%] md:w-[20%]">{item.name}</li>
+                  <li className="sm:w-[25%] md:w-[30%]">{item.instructor}</li>
+                  <li className="sm:w-[12%] md:w-[15%]">{item.level}</li>
+                  <li className="sm:w-[20%] lg:w-[30%]">
                     <div className="flex justify-center items-center space-x-3">
                       <button
                         onClick={() =>
                           dispatch(handleEditCourse({ id: item.id }))
                         }
-                        class="flex items-center px-6 py-1 w-[4.5rem] border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                        class="flex items-center px-6 py-1 sm:w-[3rem] md:w-[5rem] md:px-5 border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDeleteItem(item.id)}
-                        class="flex items-center px-2 py-1 w-[6rem] border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
+                        class="flex items-center px-2 py-1 sm:w-[4rem] md:w-[6rem] md:px-3 border border-white hover:bg-[#FEAF00] hover:text-white  rounded-lg"
                       >
                         Delete
                       </button>

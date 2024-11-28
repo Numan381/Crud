@@ -15,29 +15,23 @@ const Home = () => {
 
 
   return (
-    <div className="flex w-[63rem] h-full space-x-[4rem] mt-[10rem]">
+    <div className="flex lg:flex-row sm:flex-col sm:justify-center lg:w-[33rem] h-full sm:h-auto sm:space-y-3 mt-[6rem]">
       <Link to="/student">
-        <div
-          class="flex flex-col w-[15rem] ml-[5rem] h-[9rem] bg-[#F0F9FF] rounded"
-        >
+        <div className="flex flex-col w-[15rem] sm:ml-[-18rem] lg:ml-[1rem] lg:mt-3 h-[9rem] bg-[#F0F9FF] rounded">
           <img src={gra} alt="courseImg" className="w-9 mt-7 ml-6" />
-          <p class="ml-6 mt-2">Student {count}</p>
+          <p className="ml-6 mt-2">Student {count}</p>
         </div>
       </Link>
       <Link to="/course">
-        <div
-          class="flex flex-col w-[15rem] h-[9rem] bg-[#FEF6FB] rounded"
-        >
+        <div className="flex flex-col w-[15rem] sm:ml-[-18rem] lg:ml-5 ml-4 h-[9rem] bg-[#FEF6FB] rounded">
           <img src={pi} alt="courseImg" className="w-6 mt-7 ml-6" />
-          <p class="ml-6 mt-2">Course {count}</p>
+          <p className="ml-6 mt-2">Course {count}</p>
         </div>
       </Link>
       <Link to="/payment">
-        <div
-          class="flex flex-col w-[15rem] h-[9rem] bg-[#FEFBEC] rounded"
-        >
+        <div className="flex flex-col lg:ml-5 lg:mr-2 w-[15rem] ml-4 sm:ml-[-18rem] h-[9rem] bg-[#FEFBEC] rounded">
           <img src={us} alt="courseImg" className="w-6 mt-7 ml-6" />
-          <p class="ml-6 mt-2">Payment</p>
+          <p className="ml-6 mt-2">Payment</p>
         </div>
       </Link>
     </div>

@@ -10,11 +10,11 @@ function App() {
   return (
     <>
     <Router>
-      <div className="flex">
-        <div className="w-1/4 absolute">
+      <div className="flex sm:flex-col sm:h-screen ">
+        <div className="lg:w-1/4 lg:absolute sm:relative z-10 ">
           <Header />
         </div>
-        <div className="w-3/4 h-full ml-[17rem] fixed">
+        <div className="lg:w-3/4 lg:h-full lg:fixed lg:ml-[17rem] sm:flex sm:justify-center sm:w-full sm:mt-[2rem]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/student" element={<Student />} />
